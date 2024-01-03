@@ -19,9 +19,9 @@ const ModalPopup = ({
     <Modal
       isOpen={isOpen}
       size="md"
-      placement="top"
+      placement="center"
       onOpenChange={onOpenChange}
-      className="bg-[#222]"
+      className="bg-[#222] mx-5"
     >
       <ModalContent>
         {(onClose) => (
