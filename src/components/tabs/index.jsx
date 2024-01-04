@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import { portofolio } from "@/data/portofolio";
 import Cards from "../cards";
 
 const TabsPorto = () => {
@@ -19,10 +20,15 @@ const TabsPorto = () => {
       >
         <Tab key="Web Project" title="Web Project">
           <div className="flex flex-wrap gap-5 justify-center">
-            <Cards.CardPorto />
-            <Cards.CardPorto />
-            <Cards.CardPorto />
-            <Cards.CardPorto />
+            {portofolio.map((data) => (
+              <Cards.CardPorto
+                key={data.id}
+                title={data.title}
+                subtitle={data.subtitle}
+                number={data.id}
+                image={data.image}
+              />
+            ))}
           </div>
         </Tab>
 
