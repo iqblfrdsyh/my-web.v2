@@ -10,6 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <meta
+        name="google-site-verification"
+        content="cmCVVfUe_uvlIc6AIYwZGZfIwpKTpb2SYTfAfCGOTeo"
+      />
       <body>
         <NavigationBar />
         <main className="mx-6 md:mx-16">{children}</main>
