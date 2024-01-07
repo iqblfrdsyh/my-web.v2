@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import axios from "axios";
 import emailjs from "emailjs-com";
 import Swal from "sweetalert2";
 import Section from "@/components/layouts/section";
@@ -13,45 +12,25 @@ const Contact = () => {
   const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
 
-  const sendWhatsappMessage = async (fullname, message, email) => {
-    try {
-      if (!message) {
-        throw new Error("WhatsApp message body is empty");
-      }
+  const showSuccessAlert = () =>
+    showAlert(
+      "Success!",
+      "Your message has been sent successfully.",
+      "success"
+    );
+  const showErrorAlert = () =>
+    showAlert(
+      "Error!",
+      "Oops, something went wrong. Please try again.",
+      "error"
+    );
 
-      const response = await axios.post("/api/v1/sendMessage", {
-        body: `New message from : ${fullname}\nEmail : ${email} \n\n╭─━━━━━━━━━━━━─╮\n\n${message}\n\n╰─━━━━━━━━━━━━─╯`,
-        from: "whatsapp:+14155238886",
-        to: "whatsapp:+6288971755075",
-      });
-
-      if (response.status === 200) {
-        showSuccessAlert();
-      } else {
-        showErrorAlert();
-      }
-    } catch (error) {
-      showErrorAlert();
-    } finally {
-      setSending(false);
-    }
-  };
-
-  const sendEmailAndWhatsapp = async (fullname, email, message) => {
-    try {
-      const templateParams = {
-        from_name: email,
-        user_name: fullname,
-        user_email: email,
-        to_name: "iqblfrdsyh@gmail.com",
-        message,
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      await sendWhatsappMessage(fullname, message, email);
-    } catch (error) {
-      showErrorAlert();
-    }
+  const showAlert = (title, text, icon) => {
+    Swal.fire({
+      title,
+      text,
+      icon,
+    });
   };
 
   const sendEmail = useCallback(async (e) => {
@@ -60,36 +39,31 @@ const Contact = () => {
 
     try {
       setSending(true);
-      fullname.disabled = true;
-      email.disabled = true;
-      message.disabled = true;
+      disableFormFields([fullname, email, message]);
 
-      await sendEmailAndWhatsapp(fullname.value, email.value, message.value);
+      const templateParams = {
+        from_name: email.value,
+        user_name: fullname.value,
+        user_email: email.value,
+        to_name: "iqblfrdsyh@gmail.com",
+        message: message.value,
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      showSuccessAlert();
+    } catch (error) {
+      showErrorAlert();
     } finally {
       setSending(false);
-      fullname.disabled = false;
-      email.disabled = false;
-      message.disabled = false;
+      enableFormFields([fullname, email, message]);
+      e.target.reset();
     }
-
-    e.target.reset();
   }, []);
 
-  const showSuccessAlert = () => {
-    Swal.fire({
-      title: "Success!",
-      text: "Your message has been sent successfully.",
-      icon: "success",
-    });
-  };
-
-  const showErrorAlert = () => {
-    Swal.fire({
-      title: "Error!",
-      text: "Oops, something went wrong. Please try again.",
-      icon: "error",
-    });
-  };
+  const disableFormFields = (fields) =>
+    fields.forEach((field) => (field.disabled = true));
+  const enableFormFields = (fields) =>
+    fields.forEach((field) => (field.disabled = false));
 
   return (
     <>
