@@ -1,52 +1,88 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
+import axios from "axios";
 import emailjs from "emailjs-com";
 import Swal from "sweetalert2";
 import Section from "@/components/layouts/section";
 import { Button, Input, Textarea } from "@nextui-org/react";
 
 const Contact = () => {
+  const [sending, setSending] = useState(false);
   const publicKey = process.env.NEXT_PUBLIC_USER_ID;
   const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
 
-  const sendEmail = useCallback(
-    (e) => {
-      e.preventDefault();
+  const sendWhatsappMessage = async (fullname, message, email) => {
+    try {
+      if (!message) {
+        throw new Error("WhatsApp message body is empty");
+      }
 
+      const response = await axios.post("/api/v1/sendMessage", {
+        body: `New message from : ${fullname}\nEmail : ${email} \n\n╭─━━━━━━━━━━━━─╮\n\n${message}\n\n╰─━━━━━━━━━━━━─╯`,
+        from: "whatsapp:+14155238886",
+        to: "whatsapp:+6288971755075",
+      });
+
+      if (response.status === 200) {
+        showSuccessAlert();
+      } else {
+        showErrorAlert();
+      }
+    } catch (error) {
+      showErrorAlert();
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const sendEmailAndWhatsapp = async (fullname, email, message) => {
+    try {
       const templateParams = {
-        from_name: e.target.email.value,
-        user_name: e.target.fullname.value,
-        user_email: e.target.email.value,
+        from_name: email,
+        user_name: fullname,
+        user_email: email,
         to_name: "iqblfrdsyh@gmail.com",
-        message: e.target.message.value,
+        message,
       };
 
-      emailjs.send(serviceId, templateId, templateParams, publicKey).then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          showSuccessAlert();
-        },
-        (error) => {
-          console.log("FAILED...", error);
-          showErrorAlert();
-        }
-      );
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      await sendWhatsappMessage(fullname, message, email);
+    } catch (error) {
+      showErrorAlert();
+    }
+  };
 
-      e.target.reset();
-    },
-    [serviceId, templateId, publicKey]
-  );
+  const sendEmail = useCallback(async (e) => {
+    e.preventDefault();
+    const { fullname, email, message } = e.target;
+
+    try {
+      setSending(true);
+      fullname.disabled = true;
+      email.disabled = true;
+      message.disabled = true;
+
+      await sendEmailAndWhatsapp(fullname.value, email.value, message.value);
+    } finally {
+      setSending(false);
+      fullname.disabled = false;
+      email.disabled = false;
+      message.disabled = false;
+    }
+
+    e.target.reset();
+  }, []);
 
   const showSuccessAlert = () => {
     Swal.fire({
-      title: "Email Sent!",
-      text: "Your email has been sent successfully.",
+      title: "Success!",
+      text: "Your message has been sent successfully.",
       icon: "success",
     });
   };
-  
+
   const showErrorAlert = () => {
     Swal.fire({
       title: "Error!",
@@ -56,7 +92,7 @@ const Contact = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className="md:w-full w-3/4 md:h-[60vh] h-[40vh] flex items-center justify-center">
         <h2 className="md:text-[65px] text-[40px] font-bold">
           Let's Work Together!
@@ -82,6 +118,7 @@ const Contact = () => {
             label="Fullname"
             className="max-w-full"
             name="fullname"
+            disabled={sending}
           />
           <Input
             isRequired
@@ -89,6 +126,7 @@ const Contact = () => {
             label="Email"
             className="max-w-full"
             name="email"
+            disabled={sending}
           />
           <Textarea
             variant="faded"
@@ -97,13 +135,14 @@ const Contact = () => {
             description="Type your message for me."
             className="max-w-full text-black"
             name="message"
+            disabled={sending}
           />
-          <Button type="submit" color="primary">
-            Send
+          <Button type="submit" color="primary" disabled={sending}>
+            {sending ? "Sending..." : "Send"}
           </Button>
         </form>
       </Section>
-    </React.Fragment>
+    </>
   );
 };
 

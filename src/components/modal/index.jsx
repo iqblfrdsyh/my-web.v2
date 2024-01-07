@@ -6,6 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/react";
+import Swal from "sweetalert2";
 import React from "react";
 
 const ModalPopup = ({
@@ -15,6 +16,13 @@ const ModalPopup = ({
   content,
   buttonTitleOK,
 }) => {
+  const handleOkClick = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Sorry",
+      text: "Sorry CV is not available",
+    });
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -34,7 +42,7 @@ const ModalPopup = ({
               <Button color="danger" variant="light" onPress={onClose}>
                 Close
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" onPress={handleOkClick}>
                 {buttonTitleOK}
               </Button>
             </ModalFooter>

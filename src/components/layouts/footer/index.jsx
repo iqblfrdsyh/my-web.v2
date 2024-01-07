@@ -1,7 +1,11 @@
+"use client";
+
 import Links from "@/components/links";
 import React from "react";
 
 const Footer = () => {
+  let currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="waves">
@@ -64,8 +68,8 @@ const Footer = () => {
         </ul>
       </div>
       <p>
-        &copy;2023{" "}
-        <a href="https://instagram.com/iqblfdrsyh">M Iqbal Ferdiansyah</a>. All
+        &copy;{currentYear}
+        <a href="https://instagram.com/iqblfdrsyh"> M Iqbal Ferdiansyah</a>. All
         Rights Reserved.
       </p>
     </footer>
