@@ -7,6 +7,7 @@ import { socialMedia } from "@/data/socialmedia";
 import Link from "next/link";
 
 const Home = () => {
+  // 70%
   return (
     <React.Fragment>
       <div className="relative isolate px-6 pt-14 lg:px-8">
