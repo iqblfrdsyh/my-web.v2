@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Image } from "@nextui-org/react";
 import { BsBoundingBoxCircles, BsTelephoneForward } from "react-icons/bs";
 import Section from "@/components/layouts/section";
