@@ -7,7 +7,9 @@ import { socialMedia } from "@/data/socialmedia";
 import Link from "next/link";
 
 const Home = () => {
-  // 70%
+  window.onload = function () {
+    alert("This portfolio is still under development and not 100% complete.");
+  };
   return (
     <React.Fragment>
       <div className="relative isolate px-6 pt-14 lg:px-8">
