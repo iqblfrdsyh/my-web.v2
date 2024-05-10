@@ -3,15 +3,15 @@
 import { Button, Image } from "@nextui-org/react";
 import { BsBoundingBoxCircles, BsTelephoneForward } from "react-icons/bs";
 import Section from "@/components/layouts/section";
-import React from "react";
+import React, { useEffect } from "react";
 import Items from "@/components/items";
 import { socialMedia } from "@/data/socialmedia";
 import Link from "next/link";
 
 const Home = () => {
-  window.onload = function () {
+  useEffect(() => {
     alert("This portfolio is still under development and not 100% complete.");
-  };
+  }, []);
   return (
     <React.Fragment>
       <div className="relative isolate px-6 pt-14 lg:px-8">
