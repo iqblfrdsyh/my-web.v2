@@ -10,7 +10,12 @@ import Link from "next/link";
 
 const Home = () => {
   useEffect(() => {
-    alert("This portfolio is still under development and not 100% complete.");
+    const isAlertShown = localStorage.getItem("isAlertShown");
+
+    if (!isAlertShown) {
+      alert("This portfolio is still under development and not 100% complete.");
+      localStorage.setItem("isAlertShown", "true");
+    }
   }, []);
   return (
     <React.Fragment>
