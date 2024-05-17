@@ -4,9 +4,18 @@ import React, { useState } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import { portofolio } from "@/data/portofolio";
 import Cards from "../cards";
+import Swal from "sweetalert2";
 
 const TabsPorto = () => {
   const [selected, setSelected] = useState("Web Project");
+  
+  const handleClick = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Sorry",
+      text: "For now it can't be seen",
+    });
+  };
 
   return (
     <div className="flex w-full flex-col">
@@ -27,6 +36,7 @@ const TabsPorto = () => {
                 subtitle={data.subtitle}
                 number={data.id}
                 image={data.image}
+                onPress={handleClick}
               />
             ))}
           </div>

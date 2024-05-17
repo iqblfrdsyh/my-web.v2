@@ -15,13 +15,15 @@ const ModalPopup = ({
   title,
   content,
   buttonTitleOK,
+  swalText
 }) => {
   const handleOkClick = () => {
     Swal.fire({
       icon: "error",
       title: "Sorry",
-      text: "Sorry CV is not available",
+      text: swalText,
     });
+    
   };
   return (
     <Modal

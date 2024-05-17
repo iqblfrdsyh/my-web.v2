@@ -33,6 +33,7 @@ const About = () => {
         onOpenChange={onOpenChange}
         title="Download CV"
         content={<p>Are you sure to download this CV?</p>}
+        swalText="CV is not available"
         buttonTitleOK="Download"
       />
       <Section title="About Me" className="text-center mt-[20px] mb-[50px]">

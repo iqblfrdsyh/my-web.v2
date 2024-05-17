@@ -20,7 +20,7 @@ const Cards = {
       </Card>
     );
   },
-  CardPorto: ({ title, subtitle, image, number }) => {
+  CardPorto: ({ title, subtitle, image, number, onPress }) => {
     return (
       <Card className="py-4 md:w-[350px]">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -33,7 +33,7 @@ const Cards = {
         </CardHeader>
         <CardBody>
           <div className="mt-3">
-            <Button color="primary" variant="bordered">
+            <Button color="primary" variant="bordered" onPress={onPress}>
               View Details
             </Button>
           </div>
