@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const TabsPorto = () => {
   const [selected, setSelected] = useState("Web Project");
-  
+
   const handleClick = () => {
     Swal.fire({
       icon: "error",
@@ -44,10 +44,7 @@ const TabsPorto = () => {
 
         <Tab key="Web Design" title="Web Design">
           <Card>
-            <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </CardBody>
+            <CardBody>Content has not been uploaded yet.</CardBody>
           </Card>
         </Tab>
       </Tabs>

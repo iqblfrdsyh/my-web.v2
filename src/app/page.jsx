@@ -3,20 +3,21 @@
 import { Button, Image } from "@nextui-org/react";
 import { BsBoundingBoxCircles, BsTelephoneForward } from "react-icons/bs";
 import Section from "@/components/layouts/section";
-import React, { useEffect } from "react";
+import React from "react";
 import Items from "@/components/items";
 import { socialMedia } from "@/data/socialmedia";
 import Link from "next/link";
 
 const Home = () => {
-  useEffect(() => {
-    const isAlertShown = localStorage.getItem("isAlertShown");
+  // useEffect(() => {
+  //   const isAlertShown = localStorage.getItem("isAlertShown");
 
-    if (!isAlertShown) {
-      alert("This portfolio is still under development and not 100% complete.");
-      localStorage.setItem("isAlertShown", "true");
-    }
-  }, []);
+  //   if (!isAlertShown) {
+  //     alert("This portfolio is still under development and not 100% complete.");
+  //     localStorage.setItem("isAlertShown", "true");
+  //   }
+  // }, []);
+
   return (
     <React.Fragment>
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -33,7 +34,7 @@ const Home = () => {
           ></div>
         </div>
       </div>
-      <section className="h-[85vh] -mt-10 relative z-0">
+      <section className="-mt-10 mb-[105px] relative z-0">
         <div className="flex justify-between items-center gap-5">
           <div className="flex flex-col gap-2 md:items-start items-center md:mt-0 mt-[50px]">
             <p className="text-[15px] md:border-l-3 md:border-white md:ps-2 font-normal mb-2">
@@ -96,7 +97,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Section title="Services" className="text-center my-[50px]">
+      <Section title="Services" className=" text-center">
         <div className="flex gap-10 justify-center flex-wrap">
           <Items.ServiceItem
             itemName="Website Development"
