@@ -25,9 +25,33 @@ const datas = [
   },
   {
     id: 5,
-    title: "Learn HTML & CSS",
-    author: "Project Based Virtual Internship",
+    title: "Project Based Internship Program",
+    author: "Nusa Development Program ( NDP )",
     image: "/assets/images/certificate/5.png",
+  },
+  {
+    id: 6,
+    title: "React Dasar",
+    author: "Skilvul",
+    image: "/assets/images/certificate/6.png",
+  },
+  {
+    id: 7,
+    title: "TypeScript Course",
+    author: "NusaLMS by Nusantech",
+    image: "/assets/images/certificate/7.png",
+  },
+  {
+    id: 8,
+    title: "React JS Course",
+    author: "NusaLMS by Nusantech",
+    image: "/assets/images/certificate/8.png",
+  },
+  {
+    id: 9,
+    title: "GIT Course",
+    author: "NusaLMS by Nusantech",
+    image: "/assets/images/certificate/9.png",
   },
 ];
 

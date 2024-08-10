@@ -44,10 +44,10 @@ const Home = () => {
               I'm M Iqbal Ferdiansyah
             </h1>
             <p className="font-normal opacity-50 text-[19px]">
-              Frontend Developer
+              Website Developer
             </p>
             <p className="font-normal md:w-[600px] md:text-left text-center">
-              a frontend developer who has a hobby of playing games and
+              a Website Developer who has a hobby of playing games and
               listening to music
             </p>
             <div className="flex gap-5 items-center justify-center mt-3">

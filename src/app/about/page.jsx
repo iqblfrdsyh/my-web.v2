@@ -50,12 +50,11 @@ const About = () => {
           </div>
           <div className="flex flex-col gap-4 text-center md:text-left md:w-[350px]">
             <article className="text-[16px]">
-              Hello, I'm M Iqbal Ferdiansyah, an enthusiastic 18-year-old coder
-              exploring the world of Front-End development. I'm on a thrilling
-              journey to become a versatile Full-Stack Developer, eager to
-              create, innovate, and make a positive impact in the digital
-              landscape. Excited to learn, explore, and contribute to the
-              ever-evolving field of web development and software engineering.
+              I am a passionate web developer who always strives to deliver the
+              best in every project I handle. With experience in web
+              development, I have expertise in Frontend, Backend, and UI/UX. I
+              enjoy working in teams, exploring new things, and continuously
+              seeking ways to improve myself.
             </article>
             <div>
               <Button
