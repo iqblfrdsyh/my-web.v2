@@ -17,14 +17,14 @@ const ModalPopup = ({
   buttonTitleOK,
   swalText,
 }) => {
-  const downloadFile = async (fileUrl, onClose) => {
+  const downloadFile = async (fileUrl) => {
     const response = await fetch(fileUrl, { method: "HEAD" });
     if (response.ok) {
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = "My-CV.pdf";
       a.click();
-      onClose()
+      window.location.reload();
     } else {
       Swal.fire({
         icon: "error",
@@ -34,8 +34,9 @@ const ModalPopup = ({
     }
   };
 
-  const handleOkClick = () =>
+  const handleOkClick = () => {
     downloadFile("./assets/CV/M Iqbal Ferdiansyah - CV.pdf");
+  };
 
   return (
     <Modal
